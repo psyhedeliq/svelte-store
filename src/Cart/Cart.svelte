@@ -5,7 +5,7 @@
   let items;
 
   cartItems.subscribe(its => {
-    // console.log(items);
+    console.log(its);
     items = its;
   });
 
