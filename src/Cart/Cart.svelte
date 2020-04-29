@@ -2,6 +2,11 @@
   import { onDestroy } from "svelte";
   import CartItem from "./CartItem.svelte";
   import cartItems from "./cart-store.js";
+  import { timer } from "../timer-store.js";
+
+  const unsubscribe = timer.subscribe(count => {
+    console.log(`Cart: ${count}`);
+  });
 
   // let items;
 
@@ -10,11 +15,11 @@
   //   items = its;
   // });
 
-  // onDestroy(() => {
-  //   if (unsubscribe) {
-  //     unsubscribe();
-  //   }
-  // });
+  onDestroy(() => {
+    if (unsubscribe) {
+      unsubscribe();
+    }
+  });
 
   // export let items = [
   //   {
