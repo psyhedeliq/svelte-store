@@ -1,5 +1,6 @@
 import { writable } from 'svelte/store'
 
+// const createCart = () => {
 const cart = writable([
   {
     id: 'p3',
@@ -13,4 +14,23 @@ const cart = writable([
   },
 ])
 
-export default cart
+// custom store object
+const customCart = {
+  subscribe: cart.subscribe,
+  addItem: (item) => {
+    cart.update((items) => {
+      if (items.find((i) => i.id === item.id)) {
+        return [...items]
+      }
+      return [...items, item]
+    })
+  },
+  removeItem: (id) => {
+    cart.update((items) => {
+      return items.filter((i) => i.id !== id)
+    })
+  },
+}
+// }
+
+export default customCart
